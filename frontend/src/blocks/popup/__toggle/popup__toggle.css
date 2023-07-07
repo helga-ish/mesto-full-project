@@ -1,0 +1,28 @@
+.popup__toggle {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    background-image: url('../../../images/form_toggle.svg');
+    background-size: cover;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    cursor: pointer;
+    transition: opacity .4s;
+    }
+    
+    .popup__toggle:hover {
+      opacity: .6;
+    }
+  
+    @media screen and (max-width: 600px) {
+      .popup__toggle {
+          width: 20px;
+          height: 20px;
+          top: -36px;
+          right: 0; 
+      }
+  }

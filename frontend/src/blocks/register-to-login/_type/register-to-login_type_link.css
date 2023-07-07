@@ -1,0 +1,9 @@
+.register-to-login_type_link {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity .4s;
+}
+
+.register-to-login_type_link:hover {
+    opacity: .8;
+}

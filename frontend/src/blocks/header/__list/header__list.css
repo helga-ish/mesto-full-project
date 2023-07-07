@@ -1,0 +1,19 @@
+.header__list {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+@media screen and (max-width: 700px) {
+    .header__list {
+        display: none;
+        flex-direction: column;
+        /* text-align: center; */
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 40px;
+        border-bottom: 1px solid rgba(84, 84, 84, .7);
+    }
+}

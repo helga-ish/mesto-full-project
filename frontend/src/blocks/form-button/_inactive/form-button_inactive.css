@@ -1,0 +1,5 @@
+.form-button_inactive {
+    background-color: #E5E5E5;
+    color: #000000;
+    pointer-events: none;
+}

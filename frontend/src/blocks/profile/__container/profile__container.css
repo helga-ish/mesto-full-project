@@ -1,0 +1,15 @@
+.profile__container {
+    position: relative;
+}
+
+@media screen and (max-width: 700px) {
+    .profile__container {
+        display: flex;
+        width: 170px;
+        height: 130px;
+        margin: auto;
+        margin-bottom: 22px;
+        justify-content: center;
+        align-content: center;
+    }
+}

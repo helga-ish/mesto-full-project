@@ -1,0 +1,13 @@
+.form-button_type_white {
+    margin: 216px 0 0 0;
+    background-color: white;
+    color: black;
+    
+}
+
+@media screen and (max-width: 500px) {
+    .form-button_type_white {
+        margin: 158px 56px 77px;
+
+    }
+}

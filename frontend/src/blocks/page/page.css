@@ -1,0 +1,13 @@
+.page {
+    position: relative;
+    background-color: #000;
+    max-width: 880px;
+    min-width: 320px;
+    margin: auto;
+    color: #FFFFFF;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}

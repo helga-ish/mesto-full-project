@@ -1,0 +1,13 @@
+.authentification__container {
+    display:flex;
+    max-width: 358px;
+    min-width: 350px;
+    margin: auto;
+    margin-bottom: 112px;
+}
+
+@media screen and (max-width: 500px) {
+    .authentification__container {
+        margin-bottom: 0;
+    }
+}

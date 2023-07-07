@@ -1,0 +1,13 @@
+.logo {
+    display: flex;
+    max-width: 142px;
+    object-fit: cover;
+    align-self: flex-start;
+}
+
+@media screen and (max-width: 700px) {
+    .logo {
+        max-width: 104px;
+        margin-left: 27px;
+    }
+}

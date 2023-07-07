@@ -1,0 +1,18 @@
+.header__burger-menu {
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+.header__burger-menu {
+    display: flex;
+    background-image: url('../../../images/form_toggle.svg');
+    width: 24px;
+    height: 24px;
+    margin-right: 30px;
+    outline: none;
+    border: none;
+    background-color: black;
+    background-size: cover;
+    align-self: flex-end;
+}
+}

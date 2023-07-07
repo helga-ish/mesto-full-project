@@ -1,0 +1,7 @@
+.popup-card {
+    max-width: fit-content;
+    min-height: fit-content;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+}
