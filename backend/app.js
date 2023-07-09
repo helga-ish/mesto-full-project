@@ -26,16 +26,18 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(requestLogger);
 
-app.post('/signin', celebrate({
+app.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
 }), login);
 
-app.post('/signup', celebrate({
+app.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
@@ -45,8 +47,8 @@ app.post('/signup', celebrate({
   }).unknown(true),
 }), createUser);
 
-app.use('/', auth, require('./routes/users'));
-app.use('/', auth, require('./routes/cards'));
+app.use('/api', auth, require('./routes/users'));
+app.use('/api', auth, require('./routes/cards'));
 
 app.use('*', (req, res, next) => next(new NotFoundError()));
 
