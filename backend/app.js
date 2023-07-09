@@ -8,6 +8,11 @@ const {
 } = require('celebrate');
 const cors = require('cors');
 
+const corsOptions = {
+  origin: 'https://mesto.place.nomoredomains.work',
+  optionSuccessStatus: 200,
+};
+
 const {
   login,
   createUser,
@@ -28,11 +33,8 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 // app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(cors({
-  credentials: true,
-  origin: 'https://mesto.place.nomoredomains.work',
-}));
+app.options('*', cors());
+app.use(cors(corsOptions));
 
 app.use(requestLogger);
 
