@@ -6,6 +6,7 @@ const {
   Joi,
   errors,
 } = require('celebrate');
+const cors = require('cors');
 
 const {
   login,
@@ -27,6 +28,11 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 // app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors({
+  credentials: true,
+  origin: 'https://mesto.place.nomoredomains.work',
+}));
 
 app.use(requestLogger);
 
