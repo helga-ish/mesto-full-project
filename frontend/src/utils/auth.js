@@ -9,7 +9,7 @@ function checkResponse(res) {
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
-    // credentials: 'include',
+    credentials: 'include',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -23,6 +23,7 @@ export const register = (email, password) => {
 
 export const authorize = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
+      credentials: 'include',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

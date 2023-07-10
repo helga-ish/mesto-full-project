@@ -9,10 +9,10 @@ const {
 } = require('celebrate');
 const cors = require('cors');
 
-const corsOptions = {
-  origin: 'https://mesto.place.nomoredomains.work',
-  optionSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: 'https://mesto.place.nomoredomains.work',
+//   optionSuccessStatus: 200,
+// };
 
 const {
   login,
@@ -35,8 +35,13 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.options('*', cors());
-app.use(cors(corsOptions));
+// app.options('*', cors());
+// app.use(cors(corsOptions));
+
+app.use(cors({
+  credentials: true,
+  origin: 'https://mesto.place.nomoredomains.work',
+}));
 
 app.use(requestLogger);
 
