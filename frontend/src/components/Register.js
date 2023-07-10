@@ -48,7 +48,7 @@ export default function Register({isInfoToolTipPopupOpen, isSucceed, handleInfoT
           formValueEmail={formValue.email}
           formValuePassword={formValue.password} 
           >
-            <p className="register-to-login">Уже зарегистрированы? <Link className="register-to-login_type_link" to='/sign-in'>Войти</Link></p>
+            <p className="register-to-login">Уже зарегистрированы? <Link className="register-to-login_type_link" to='/signin'>Войти</Link></p>
             <InfoTooltip
               isSucceed={isSucceed}
               isOpen={isInfoToolTipPopupOpen}

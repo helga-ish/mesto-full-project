@@ -25,7 +25,7 @@ export default function PageWithForm({name, title, children, buttonTitle, onSubm
                             className="form__field form__field_type_password form__field_type_white" 
                             id="password" 
                             name="password"
-                            minLength="6" 
+                            minLength="8" 
                             maxLength="16" 
                             placeholder="Пароль"  
                             required

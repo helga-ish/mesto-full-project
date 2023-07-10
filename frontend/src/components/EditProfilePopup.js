@@ -47,7 +47,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, buttonText}) {
                 name="inputName" 
                 placeholder="Имя" 
                 minLength="2" 
-                maxLength="40" 
+                maxLength="30" 
                 required 
                 value={nameUser || ''} 
                 onChange={handleNameChange}
@@ -62,7 +62,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser, buttonText}) {
                 name="inputAbout" 
                 placeholder="Обо мне" 
                 minLength="2" 
-                maxLength="200" 
+                maxLength="30" 
                 required 
                 value={description || ''} 
                 onChange={handleDescriptionChange}
