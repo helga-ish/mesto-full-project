@@ -24,8 +24,8 @@ const classNameForBurgerMenu = `header__burger-menu ${!isActive ? 'header__burge
         <header className="header">
             
 
-            {location.pathname === '/sign-up' ? (
-            <Link className='header__link' to="/sign-in">Войти</Link>) :
+            {location.pathname === '/signup' ? (
+            <Link className='header__link' to="/signin">Войти</Link>) :
             loggedIn ? (
                 <div>
                     <ul className={classNameForHeaderList}>
@@ -35,7 +35,7 @@ const classNameForBurgerMenu = `header__burger-menu ${!isActive ? 'header__burge
                     <div className={classNameForBurgerMenu} onClick={!isActive ? handleActiveState : handleInactiveState}></div>
                 </div>
             ) : (
-                    <Link className='header__link' to="/sign-up">Зарегистрироваться</Link>
+                    <Link className='header__link' to="/signup">Зарегистрироваться</Link>
             )
             }
 

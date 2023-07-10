@@ -42,7 +42,7 @@ function App() {
     }
     function onCloseAndNavigate() {
       setIsInfoToolTipPopupOpen(false);
-      navigate('/sign-in', {replace: true});
+      navigate('/signin', {replace: true});
     }
     function handleSucceed() {
         setIsSucceed(true);
@@ -53,7 +53,7 @@ function App() {
     function handleSignOut() {
         localStorage.removeItem('token');
         setLoggedIn(false);
-        navigate('sign-in', {replace: true});
+        navigate('/signin', {replace: true});
     }
 
     // setting email in header related
@@ -230,7 +230,7 @@ function App() {
                                                 />} 
                         />
                     </Route>
-                    <Route   path="/sign-in" element={
+                    <Route   path="/signin" element={
                     <Login 
                         handleLogin={handleLogin}
                         isInfoToolTipPopupOpen={isInfoToolTipPopupOpen}
@@ -239,7 +239,7 @@ function App() {
                         closeInfoToolTipPopup={closeInfoToolTipPopup}
                         handleNotSucceed={handleNotSucceed}
                         />} />
-                    <Route   path="/sign-up" element={
+                    <Route   path="/signup" element={
                     <Register
                         isInfoToolTipPopupOpen={isInfoToolTipPopupOpen}
                         isSucceed={isSucceed}
