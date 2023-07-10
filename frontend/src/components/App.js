@@ -89,7 +89,7 @@ function App() {
     React.useEffect(() => {
         api.getProfileUserInfo()
         .then((userData) => {
-            setCurrentUser(userData);
+            setCurrentUser(userData.data);
         })
         .catch((error) => {
             console.error(`Ошибка загрузки данных пользователя с сервера: ${error}`);
@@ -100,7 +100,7 @@ function App() {
         api.getInitialCards()
         .then((data) => {
             setCards(
-                data.map((item) => ({
+                data.data.map((item) => ({
                     _id: item._id,
                     name: item.name,
                     link: item.link,

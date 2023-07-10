@@ -35,7 +35,7 @@ export default function Login({handleLogin, isInfoToolTipPopupOpen, isSucceed, h
             }
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             handleInfoToolTipClick();
             handleNotSucceed();
           });

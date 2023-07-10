@@ -14,6 +14,8 @@ class Api {
     getInitialCards() {
         return fetch(`${this._url}/cards`, {
         method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
         headers: this._headers,
     }).then((res) => {
         return this._checkResponse(res);
@@ -23,6 +25,7 @@ class Api {
     getProfileUserInfo() {
         return fetch(`${this._url}/users/me`, {
             method: 'GET',
+            mode: "cors",
             headers: this._headers,
         }).then((res) => {
             return this._checkResponse(res);
@@ -90,7 +93,7 @@ class Api {
 const api = new Api({
     url: 'https://api.mesto.place.nomoredomains.work',
     headers: {
-      authorization: `Bearer ${localStorage.getItem("token")}`,
+      authorization: `Bearer ${localStorage.getItem('token')}`,
       'content-type': 'application/json'
     }
 })
