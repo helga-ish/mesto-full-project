@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.80.169
+IP 51.250.80.169
 
 Frontend https://mesto.place.nomoredomains.work
 
