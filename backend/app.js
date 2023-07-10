@@ -24,14 +24,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const uri = 'mongodb://localhost:27017/mestodb';
+const uri = 'mongodb://0.0.0.0:27017/mongodb';
 
-mongoose.connect(
-  uri,
-  {
-    useNewUrlParser: true,
-  },
-);
+mongoose.connect(uri);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

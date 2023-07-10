@@ -5,6 +5,12 @@
 
 Адрес репозитория: hhttps://github.com/helga-ish/react-mesto-api-full-gha
 
+## Strart backend server
+
+```bash
+pm2 start app.js
+```
+
 ## Ссылки на проект
 
 IP 51.250.80.169
