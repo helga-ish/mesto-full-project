@@ -24,11 +24,12 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const uri = 'mongodb://localhost:27017/mestodb';
+
 mongoose.connect(
-  'mongodb://localhost:27017/mestodb',
+  uri,
   {
     useNewUrlParser: true,
-    useFindAndModify: false,
   },
 );
 
