@@ -94,7 +94,7 @@ function App() {
         .catch((error) => {
             console.error(`Ошибка загрузки данных пользователя с сервера: ${error}`);
         })
-    }, []);
+    }, [loggedIn]);
 
     React.useEffect(() => {
         api.getInitialCards()
@@ -112,7 +112,7 @@ function App() {
         .catch((error) => {
             console.error(`Ошибка загрузки данных с сервера: ${error}`);
           });
-    }, []);
+    }, [loggedIn]);
 
     function handleCardLike(card) {
         const isLiked = card.likes.some(i => i === currentUser._id);
