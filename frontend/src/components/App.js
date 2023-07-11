@@ -238,6 +238,7 @@ function App() {
                         handleInfoToolTipClick={handleInfoToolTipClick}
                         closeInfoToolTipPopup={closeInfoToolTipPopup}
                         handleNotSucceed={handleNotSucceed}
+                        checkToken={checkToken}
                         />} />
                     <Route   path="/signup" element={
                     <Register

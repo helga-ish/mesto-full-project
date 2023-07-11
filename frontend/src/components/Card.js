@@ -10,7 +10,6 @@ function Card({card, onCardClick, onCardLike, onDeleteClick}) {
     }
     function handleLikeClick() {
         onCardLike(card);
-        console.log(card);
     }
 
     function handleClick() {

@@ -5,7 +5,7 @@ import * as auth from '../utils/auth.js';
 import InfoTooltip from "./InfoTooltip";
 
 
-export default function Login({handleLogin, isInfoToolTipPopupOpen, isSucceed, handleInfoToolTipClick, closeInfoToolTipPopup, handleNotSucceed}) {
+export default function Login({handleLogin, isInfoToolTipPopupOpen, isSucceed, handleInfoToolTipClick, closeInfoToolTipPopup, handleNotSucceed, checkToken}) {
 
     const [formValue, setFormValue] = React.useState({
         email: '',
@@ -31,6 +31,7 @@ export default function Login({handleLogin, isInfoToolTipPopupOpen, isSucceed, h
           .then((data) => {
             if(data.token) {
               handleLogin();
+              checkToken();
               navigate("/", {replace: true})
             }
           })
