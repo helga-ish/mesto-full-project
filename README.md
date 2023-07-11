@@ -3,7 +3,7 @@
 # react-mesto-api-full
 Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд распологается в директории `backend/`, а фронтенд - в `frontend/`. 
 
-Адрес репозитория: hhttps://github.com/helga-ish/react-mesto-api-full-gha
+Адрес репозитория: https://github.com/helga-ish/react-mesto-api-full-gha
 
 ## Start backend server
 
