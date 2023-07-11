@@ -49,7 +49,6 @@ class Api {
     editAvatar(data) {
         return fetch(`${this._url}/users/me/avatar`, {
             method: 'PATCH',
-            mode: "cors",
             headers: this._headers,
             body: JSON.stringify({
                 avatar: data.avatar

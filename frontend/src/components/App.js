@@ -119,7 +119,7 @@ function App() {
         
         api.changeLikeStatus(card._id, !isLiked)
         .then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+            setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
         })
         .catch((error) => {
             console.error(`Ошибка загрузки данных с сервера: ${error}`);
@@ -166,7 +166,7 @@ function App() {
         setIsLoading(true);
         api.changeProfileUserInfo(object)
         .then((newUserData) => {
-            setCurrentUser(newUserData)
+            setCurrentUser(newUserData.data)
             closeAllPopups();
         })
         .catch((error) => {
@@ -181,7 +181,7 @@ function App() {
         setIsLoading(true);
         api.editAvatar(link)
         .then((dataAvatar) => {
-            setCurrentUser(dataAvatar);
+            setCurrentUser(dataAvatar.data);
             closeAllPopups();
         })
         .catch((error) => {
@@ -196,7 +196,7 @@ function App() {
         setIsLoading(true);
         api.addCard(object)
         .then((newCard) => {
-            setCards([newCard, ...cards]);
+            setCards([newCard.data, ...cards]);
             closeAllPopups();
         })
         .catch((error) => {
