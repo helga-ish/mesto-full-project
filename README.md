@@ -5,7 +5,7 @@
 
 Адрес репозитория: hhttps://github.com/helga-ish/react-mesto-api-full-gha
 
-## Strart backend server
+## Start backend server
 
 ```bash
 pm2 start app.js
