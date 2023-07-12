@@ -69,39 +69,73 @@ const createUser = (req, res, next) => {
     .catch(next);
 };
 
-const updateProfile = (req, res, next) => {
-  const { name, about } = req.body;
-
+const updateFunction = (req, res, next, updateData) => {
   const currentUser = req.user._id;
-
   User.findByIdAndUpdate(
     currentUser,
-    { name, about },
+    updateData,
     {
       new: true,
-      runValidators: true,
+      unValidators: true,
     },
   )
     .then((user) => res.status(200).send({ data: user }))
     .catch(next);
+};
+
+const updateProfile = (req, res, next) => {
+  const { name, about } = req.body;
+  updateFunction(req, res, next, { name, about });
 };
 
 const updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
-
-  const currentUser = req.user._id;
-
-  User.findByIdAndUpdate(
-    currentUser,
-    { avatar },
-    {
-      new: true,
-      runValidators: true,
-    },
-  )
-    .then((user) => res.status(200).send({ data: user }))
-    .catch(next);
+  updateFunction(req, res, next, { avatar });
 };
+// const updateProfile = (req, res, next) => {
+//   const { name, about } = req.body;
+
+//   const currentUser = req.user._id;
+
+//   User.findByIdAndUpdate(
+//     currentUser,
+//     { name, about },
+//     {
+//       new: true,
+//       runValidators: true,
+//     },
+//   )
+//     .then((user) => res.status(200).send({ data: user }))
+//     .catch(next);
+// };
+
+// const updateAvatar = (req, res, next) => {
+//   const { avatar } = req.body;
+
+//   const currentUser = req.user._id;
+
+//   User.findByIdAndUpdate(
+//     currentUser,
+//     { avatar },
+//     {
+//       new: true,
+//       runValidators: true,
+//     },
+//   )
+//     .then((user) => res.status(200).send({ data: user }))
+//     .catch(next);
+// };
+
+// function withUpdate(updateFunction) {
+//   return (req, res, next) => {
+//     updateFunction(req, res, next)
+//       .then((user) => res.status(200).send({ data: user }))
+//       .catch(next);
+//   };
+// }
+
+// const updateProfileWithUpdate = withUpdate(updateProfile);
+// const updateAvatarWithUpdate = withUpdate(updateAvatar);
 
 module.exports = {
   login,
