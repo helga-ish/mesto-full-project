@@ -31,18 +31,13 @@ const deleteCard = (req, res, next) => {
 };
 
 const putLike = (req, res, next) => {
-  Card.findOne({ _id: req.params.cardId })
-    .orFail()
-    .then(() => {
-      Card.findByIdAndUpdate(
-        req.params.cardId,
-        { $addToSet: { likes: req.user._id } },
-        { new: true },
-      )
-        .then((card) => res.status(200).send({ data: card }))
-        .catch(next(new NotFoundError('Карточка не найдена.')));
-    })
-    .catch(next);
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $addToSet: { likes: req.user._id } },
+    { new: true },
+  )
+    .then((card) => res.status(200).send({ data: card }))
+    .catch(next(new NotFoundError('Карточка не найдена.')));
 };
 
 const deleteLike = (req, res, next) => {
