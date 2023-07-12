@@ -16,6 +16,13 @@ const {
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const processErrors = require('./middlewares/processErrors');
+const {
+  userAboutValidation,
+  userAvatarValidation,
+  userEmailValidation,
+  userNameValidation,
+  userPasswordValidation,
+} = require('./middlewares/celebrateValidation');
 const NotFoundError = require('./components/NotFoundError');
 
 const { PORT = 3000 } = process.env;
@@ -42,20 +49,17 @@ app.get('/crash-test', () => {
 });
 
 app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-  }),
+  body: Joi.object().keys(userEmailValidation, userPasswordValidation),
 }), login);
 
 app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required().min(8),
-    name: Joi.string().min(2).max(30).default('Жак-Ив Кусто'),
-    about: Joi.string().min(2).max(30).default('Исследователь'),
-    avatar: Joi.string().pattern(/(^https?:\/\/)?(www\.)?[a-z0-9~_\-.]+\.[a-z]{2,9}([!-~]*)?$/i).default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png'),
-  }).unknown(true),
+  body: Joi.object().keys(
+    userEmailValidation,
+    userPasswordValidation,
+    userNameValidation,
+    userAboutValidation,
+    userAvatarValidation,
+  ).unknown(true),
 }), createUser);
 
 app.use('/', auth, require('./routes/users'));
