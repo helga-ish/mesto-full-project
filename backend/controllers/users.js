@@ -69,7 +69,7 @@ const createUser = (req, res, next) => {
           about: user.about,
           avatar: user.avatar,
         }))
-        .catch(next(new NotFoundError('Пользователь не найден.')));
+        .catch(() => next(new NotFoundError('Пользователь не найден.')));
     })
     .catch(next);
 };
