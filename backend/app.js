@@ -30,8 +30,6 @@ const uri = 'mongodb://0.0.0.0:27017/mongodb';
 
 mongoose.connect(uri);
 
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cors({
   credentials: true,
   origin: 'https://mesto.place.nomoredomains.work',
