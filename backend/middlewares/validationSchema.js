@@ -1,59 +1,50 @@
 const { Joi } = require('celebrate');
 
-const signInSchema = Joi.object().keys({
+const userEmailPasswordSchema = {
   email: Joi.string().required().email(),
   password: Joi.string().required().min(8),
-});
+};
 
-const signUpSchema = Joi.object().keys({
-  email: Joi.string().required().email(),
-  password: Joi.string().required().min(8),
+const userNameAboutSchema = {
   name: Joi.string().min(2).max(30).default('Жак-Ив Кусто'),
   about: Joi.string().min(2).max(30).default('Исследователь'),
-  avatar: Joi.string().pattern(/(^https?:\/\/)?(www\.)?[a-z0-9~_\-.]+\.[a-z]{2,9}([!-~]*)?$/i).default('https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png'),
+};
+
+const avatarSchema = {
+  avatar: Joi.string().required().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
+};
+
+const signInSchema = Joi.object().keys(userEmailPasswordSchema);
+
+const signUpSchema = Joi.object().keys({
+  ...userEmailPasswordSchema,
+  ...userNameAboutSchema,
+  ...avatarSchema,
 });
 
-// const validateForCreateCard = () => {
-//   celebrate({
-//     body: Joi.object().keys({
-//       name: Joi.string().required().min(2).max(30),
-//     }),
-//   });
-// };
+const cardInfoSchema = Joi.object().keys({
+  name: Joi.string().required().min(2).max(30),
+  link: Joi.string().required().pattern(/(^https?:\/\/)?(www\.)?[a-z0-9~_\-.]+\.[a-z]{2,9}([!-~]*)?$/i),
+});
 
-// const validateForCardId = () => {
-//   celebrate({
-//     params: Joi.object().keys({
-//       cardId: Joi.string().required().length(24).hex(),
-//     }),
-//   });
-// };
+const cardIdSchema = Joi.object().keys({
+  cardId: Joi.string().required().length(24).hex(),
+});
 
-// const validateForUserId = () => {
-//   celebrate({
-//     params: Joi.object().keys({
-//       userId: Joi.string().required().length(24).hex(),
-//     }),
-//   });
-// };
+const userIdSchema = Joi.object().keys({
+  userId: Joi.string().required().length(24).hex(),
+});
 
-// const validateForAvatar = () => {
-//   celebrate({
-//     body: Joi.object().keys({
-//     }),
-//   });
-// };
+const userAvatarSchema = Joi.object().keys(avatarSchema);
 
-// const validateForUserData = () => {
-//   celebrate({
-//     body: Joi.object().keys({
-//       name: Joi.string().required().min(2).max(30),
-//       about: Joi.string().required().min(2).max(30),
-//     }),
-//   });
-// };
+const userInfoSchema = Joi.object().keys(userNameAboutSchema);
 
 module.exports = {
   signInSchema,
   signUpSchema,
+  userIdSchema,
+  userAvatarSchema,
+  userInfoSchema,
+  cardIdSchema,
+  cardInfoSchema,
 };
