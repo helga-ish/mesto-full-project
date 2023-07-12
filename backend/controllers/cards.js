@@ -27,8 +27,9 @@ const deleteCard = (req, res, next) => {
         .then(() => {
           if (card != null) {
             res.status(200).send({ data: card });
+            return;
           }
-          return next(new NotFoundError('Карточка не найдена.'));
+          next(new NotFoundError('Карточка не найдена.'));
         });
     })
     .catch(next);
