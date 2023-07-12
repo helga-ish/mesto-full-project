@@ -21,7 +21,7 @@ const deleteCard = (req, res, next) => {
   Card.findOne({ _id: req.params.cardId })
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
-        return next(new ForbiddenError());
+        next(new ForbiddenError());
       }
       return Card.findByIdAndRemove(req.params.cardId)
         .then(() => {
