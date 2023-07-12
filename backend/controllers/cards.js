@@ -19,35 +19,20 @@ const createCard = (req, res, next) => {
 
 const deleteCard = (req, res, next) => {
   Card.findOne({ _id: req.params.cardId })
-    .then((card) => {
-      if (card.owner.toString() !== req.user._id) {
-        next(new ForbiddenError());
+    .then((cardData) => {
+      if (cardData === null) {
+        return next(new NotFoundError('Карточка не найдена.'));
       }
       return Card.findByIdAndRemove(req.params.cardId)
-        .then((cardWithId) => {
-          if (cardWithId != null) {
-            res.status(200).send({ data: cardWithId });
-            return;
+        .then((card) => {
+          if (card.owner.toString() !== req.user._id) {
+            return next(new ForbiddenError());
           }
-          next(new NotFoundError('Карточка не найдена.'));
+          return res.status(200).send({ data: card });
         });
     })
     .catch(next);
 };
-
-// const deleteCard = (req, res, next) => {
-//   Card.findByIdAndRemove(req.params.cardId)
-//     .then((card) => {
-//       if (card.owner.toString() !== req.user._id) {
-//         next(new ForbiddenError());
-//       } else if (card != null) {
-//         res.status(200).send({ data: card });
-//         return;
-//       }
-//       next(new NotFoundError('Карточка не найдена.'));
-//     })
-//     .catch(next);
-// };
 
 const putLike = (req, res, next) => {
   Card.findByIdAndUpdate(
