@@ -126,17 +126,6 @@ const updateAvatar = (req, res, next) => {
 //     .catch(next);
 // };
 
-// function withUpdate(updateFunction) {
-//   return (req, res, next) => {
-//     updateFunction(req, res, next)
-//       .then((user) => res.status(200).send({ data: user }))
-//       .catch(next);
-//   };
-// }
-
-// const updateProfileWithUpdate = withUpdate(updateProfile);
-// const updateAvatarWithUpdate = withUpdate(updateAvatar);
-
 module.exports = {
   login,
   getUsers,
