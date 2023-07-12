@@ -24,8 +24,14 @@ const deleteCard = (req, res, next) => {
         return next(new ForbiddenError());
       }
       return Card.findByIdAndRemove(req.params.cardId)
-        .then(() => res.status(200).send({ data: card }))
-        .catch(() => next(new NotFoundError('Карточка не найдена.')));
+        .then(() => {
+          if (card != null) {
+            res.status(200).send({ data: card });
+            return;
+          }
+          next(new NotFoundError('Карточка не найдена.'));
+        })
+        .catch(next);
     })
     .catch(next);
 };
@@ -47,16 +53,17 @@ const putLike = (req, res, next) => {
 };
 
 const deleteLike = (req, res, next) => {
-  Card.findOne({ _id: req.params.cardId })
-    .orFail()
-    .then(() => {
-      Card.findByIdAndUpdate(
-        req.params.cardId,
-        { $pull: { likes: req.user._id } },
-        { new: true },
-      )
-        .then((card) => res.status(200).send({ data: card }))
-        .catch(() => next(new NotFoundError('Карточка не найдена.')));
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $pull: { likes: req.user._id } },
+    { new: true },
+  )
+    .then((card) => {
+      if (card != null) {
+        res.status(200).send({ data: card });
+        return;
+      }
+      next(new NotFoundError('Карточка не найдена.'));
     })
     .catch(next);
 };
