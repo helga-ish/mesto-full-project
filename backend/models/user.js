@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-// const isEmail = require('validator/lib/isEmail');
 const UnauthorizedError = require('../components/UnauthorizedError');
 
 const urlRegEx = /(^https?:\/\/)?(www\.)?[a-z0-9~_\-.]+\.[a-z]{2,9}([!-~]*)?$/i;
@@ -22,10 +21,14 @@ const userSchema = new mongoose.Schema({
   },
   name: {
     type: String,
+    minLength: 2,
+    maxLength: 30,
     default: 'Жак-Ив Кусто',
   },
   about: {
     type: String,
+    minLength: 2,
+    maxLength: 30,
     default: 'Исследователь',
   },
   avatar: {
