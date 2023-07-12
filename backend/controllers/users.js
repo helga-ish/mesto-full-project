@@ -34,18 +34,13 @@ const getMe = (req, res, next) => {
 };
 
 const getUserById = (req, res, next) => {
-  User.findOne({ _id: req.params.userId })
-    .orFail()
-    .then(() => {
-      User.findById(req.params.userId)
-        .then((user) => {
-          if (user != null) {
-            res.status(200).send({ data: user });
-            return;
-          }
-          next(new NotFoundError('Пользователь не найден.'));
-        })
-        .catch(next);
+  User.findById(req.params.userId)
+    .then((user) => {
+      if (user != null) {
+        res.status(200).send({ data: user });
+        return;
+      }
+      next(new NotFoundError('Пользователь не найден.'));
     })
     .catch(next);
 };
