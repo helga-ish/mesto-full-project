@@ -49,12 +49,13 @@ const getUserById = (req, res, next) => {
         .then((user) => {
           if (user != null) {
             res.status(200).send({ data: user });
+            return;
           }
-          return next();
+          next(new NotFoundError('Пользователь не найден.'));
         })
         .catch(next);
     })
-    .catch(() => next(new NotFoundError('Пользователь не найден.')));
+    .catch(next);
 };
 
 const createUser = (req, res, next) => {
@@ -76,7 +77,7 @@ const createUser = (req, res, next) => {
           about: user.about,
           avatar: user.avatar,
         }))
-        .catch(next);
+        .catch(next(new NotFoundError('Пользователь не найден.')));
     })
     .catch(next);
 };
