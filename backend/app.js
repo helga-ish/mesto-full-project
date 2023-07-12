@@ -3,8 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const {
-  celebrate,
-  Joi,
+  // celebrate,
+  // Joi,
   errors,
 } = require('celebrate');
 const cors = require('cors');
@@ -16,13 +16,7 @@ const {
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const processErrors = require('./middlewares/processErrors');
-const {
-  userAboutValidation,
-  userAvatarValidation,
-  userEmailValidation,
-  userNameValidation,
-  userPasswordValidation,
-} = require('./middlewares/celebrateValidation');
+const { validateForSignIn, validateForSignUp } = require('./middlewares/celebrateValidation');
 const NotFoundError = require('./components/NotFoundError');
 
 const { PORT = 3000 } = process.env;
@@ -48,19 +42,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', celebrate({
-  body: Joi.object().keys(userEmailValidation, userPasswordValidation),
-}), login);
+app.post('/signin', validateForSignIn, login);
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys(
-    userEmailValidation,
-    userPasswordValidation,
-    userNameValidation,
-    userAboutValidation,
-    userAvatarValidation,
-  ).unknown(true),
-}), createUser);
+app.post('/signup', validateForSignUp, createUser);
 
 app.use('/', auth, require('./routes/users'));
 app.use('/', auth, require('./routes/cards'));
