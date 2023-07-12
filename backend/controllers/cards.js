@@ -25,7 +25,7 @@ const deleteCard = (req, res, next) => {
       }
       return Card.findByIdAndRemove(req.params.cardId)
         .then(() => res.status(200).send({ data: card }))
-        .catch(next(new NotFoundError('Карточка не найдена.')));
+        .catch(() => next(new NotFoundError('Карточка не найдена.')));
     })
     .catch(next);
 };
@@ -37,7 +37,7 @@ const putLike = (req, res, next) => {
     { new: true },
   )
     .then((card) => res.status(200).send({ data: card }))
-    .catch(next(new NotFoundError('Карточка не найдена.')));
+    .catch(() => next(new NotFoundError('Карточка не найдена.')));
 };
 
 const deleteLike = (req, res, next) => {
@@ -50,7 +50,7 @@ const deleteLike = (req, res, next) => {
         { new: true },
       )
         .then((card) => res.status(200).send({ data: card }))
-        .catch(next(new NotFoundError('Карточка не найдена.')));
+        .catch(() => next(new NotFoundError('Карточка не найдена.')));
     })
     .catch(next);
 };
