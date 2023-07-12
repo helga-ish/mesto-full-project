@@ -1,6 +1,6 @@
 const { CONFLICT_ERROR } = require('../constants/constants');
 const ValidationError = require('../components/ValidationError');
-const NotFoundError = require('../components/NotFoundError');
+// const NotFoundError = require('../components/NotFoundError');
 const UnauthorizedError = require('../components/UnauthorizedError');
 const ForbiddenError = require('../components/ForbiddenError');
 
@@ -11,10 +11,9 @@ const processErrors = (err, req, res, next) => {
       .status(error.statusCode)
       .send({ message: error.message });
   } else if (err.name === 'NotFoundError') {
-    const error = new NotFoundError('Страница не найдена.');
     res
-      .status(error.statusCode)
-      .send({ message: error.message });
+      .status(err.statusCode)
+      .send({ message: err.message });
   } else if (err.name === 'UnauthorizedError') {
     const error = new UnauthorizedError('Необходима авторизация.');
     res
