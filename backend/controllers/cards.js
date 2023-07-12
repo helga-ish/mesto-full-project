@@ -17,33 +17,20 @@ const createCard = (req, res, next) => {
     .catch(next);
 };
 
-// const deleteCard = (req, res, next) => {
-//   Card.findOne({ _id: req.params.cardId })
-//     .then((card) => {
-//       if (card.owner.toString() !== req.user._id) {
-//         next(new ForbiddenError());
-//       }
-//       return Card.findByIdAndRemove(req.params.cardId)
-//         .then(() => {
-//           if (card != null) {
-//             res.status(200).send({ data: card });
-//             return;
-//           }
-//           next(new NotFoundError('Карточка не найдена.'));
-//         });
-//     })
-//     .catch(next);
-// };
-
 const deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findOne({ _id: req.params.cardId })
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         next(new ForbiddenError());
-      } else if (card == null) {
-        next(new NotFoundError('Карточка не найдена.'));
       }
-      res.status(200).send({ data: card });
+      return Card.findByIdAndRemove(req.params.cardId)
+        .then((data) => {
+          if (data != null) {
+            res.status(200).send({ data: card });
+            return;
+          }
+          next(new NotFoundError('Карточка не найдена.'));
+        });
     })
     .catch(next);
 };
