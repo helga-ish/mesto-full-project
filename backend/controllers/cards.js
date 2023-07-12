@@ -36,8 +36,14 @@ const putLike = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .then((card) => res.status(200).send({ data: card }))
-    .catch(() => next(new NotFoundError('Карточка не найдена.')));
+    .then((card) => {
+      if (card != null) {
+        res.status(200).send({ data: card });
+        return;
+      }
+      next(new NotFoundError('Карточка не найдена.'));
+    })
+    .catch(next);
 };
 
 const deleteLike = (req, res, next) => {
