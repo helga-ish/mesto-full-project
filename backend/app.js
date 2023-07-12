@@ -62,7 +62,7 @@ app.post('/signup', celebrate({
 app.use('/', auth, require('./routes/users'));
 app.use('/', auth, require('./routes/cards'));
 
-app.use('*', (req, res, next) => next(new NotFoundError()));
+app.use('*', (req, res, next) => next(new NotFoundError('Страница не найдена')));
 
 app.use(errorLogger);
 
