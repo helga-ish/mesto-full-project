@@ -11,7 +11,7 @@ const userNameAboutSchema = {
 };
 
 const avatarSchema = {
-  avatar: Joi.string().required().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
+  avatar: Joi.string().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
 };
 
 const signInSchema = Joi.object().keys(userEmailPasswordSchema);
@@ -35,7 +35,9 @@ const userIdSchema = Joi.object().keys({
   userId: Joi.string().required().length(24).hex(),
 });
 
-const userAvatarSchema = Joi.object().keys(avatarSchema);
+const userAvatarSchema = Joi.object().keys({
+  avatar: Joi.string().required().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
+});
 
 const userInfoSchema = Joi.object().keys(userNameAboutSchema);
 
