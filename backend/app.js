@@ -42,9 +42,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', validateForSignIn, login);
+app.post('/signin', validateForSignIn(), login);
 
-app.post('/signup', validateForSignUp, createUser);
+app.post('/signup', validateForSignUp(), createUser);
 
 app.use('/', auth, require('./routes/users'));
 app.use('/', auth, require('./routes/cards'));
