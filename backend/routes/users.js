@@ -10,11 +10,7 @@ const {
 
 router.get('/users', getUsers);
 
-router.get('/users/me', celebrate({
-  body: Joi.object().keys({
-    id: Joi.string().required().length(24).hex(),
-  }),
-}), getMe);
+router.get('/users/me', getMe);
 
 router.get('/users/:userId', celebrate({
   params: Joi.object().keys({
@@ -24,14 +20,14 @@ router.get('/users/:userId', celebrate({
 
 router.patch('/users/me', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
   }),
 }), updateProfile);
 
 router.patch('/users/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
+    avatar: Joi.string().required().pattern(/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&/=]*)$/i),
   }),
 }), updateAvatar);
 
