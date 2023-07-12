@@ -17,37 +17,37 @@ const createCard = (req, res, next) => {
     .catch(next);
 };
 
-// const deleteCard = (req, res, next) => {
-//   Card.findOne({ _id: req.params.cardId })
-//     .then((card) => {
-//       if (card.owner.toString() !== req.user._id) {
-//         next(new ForbiddenError());
-//       }
-//       return Card.findByIdAndRemove(req.params.cardId)
-//         .then((data) => {
-//           if (data != null) {
-//             res.status(200).send({ data: card });
-//             return;
-//           }
-//           next(new NotFoundError('Карточка не найдена.'));
-//         });
-//     })
-//     .catch(next);
-// };
-
 const deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findOne({ _id: req.params.cardId })
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         next(new ForbiddenError());
-      } else if (card != null) {
-        res.status(200).send({ data: card });
-        return;
       }
-      next(new NotFoundError('Карточка не найдена.'));
+      return Card.findByIdAndRemove(req.params.cardId)
+        .then((cardWithId) => {
+          if (cardWithId != null) {
+            res.status(200).send({ data: cardWithId });
+            return;
+          }
+          next(new NotFoundError('Карточка не найдена.'));
+        });
     })
     .catch(next);
 };
+
+// const deleteCard = (req, res, next) => {
+//   Card.findByIdAndRemove(req.params.cardId)
+//     .then((card) => {
+//       if (card.owner.toString() !== req.user._id) {
+//         next(new ForbiddenError());
+//       } else if (card != null) {
+//         res.status(200).send({ data: card });
+//         return;
+//       }
+//       next(new NotFoundError('Карточка не найдена.'));
+//     })
+//     .catch(next);
+// };
 
 const putLike = (req, res, next) => {
   Card.findByIdAndUpdate(
