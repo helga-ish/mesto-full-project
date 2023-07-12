@@ -40,11 +40,10 @@ const deleteCard = (req, res, next) => {
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         next(new ForbiddenError());
-      } else if (card != null) {
-        res.status(200).send({ data: card });
-        return;
+      } else if (card === null) {
+        next(new NotFoundError('Карточка не найдена.'));
       }
-      next(new NotFoundError('Карточка не найдена.'));
+      res.status(200).send({ data: card });
     })
     .catch(next);
 };
