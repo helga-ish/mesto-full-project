@@ -1,6 +1,6 @@
 const { CONFLICT_ERROR } = require('../constants/constants');
 const ValidationError = require('../components/ValidationError');
-const NotFoundError = require('../components/NotFoundError');
+// const NotFoundError = require('../components/NotFoundError');
 const UnauthorizedError = require('../components/UnauthorizedError');
 const ForbiddenError = require('../components/ForbiddenError');
 
