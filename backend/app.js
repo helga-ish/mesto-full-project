@@ -3,8 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const {
-  // celebrate,
-  // Joi,
+  celebrate,
   errors,
 } = require('celebrate');
 const cors = require('cors');
@@ -16,7 +15,10 @@ const {
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const processErrors = require('./middlewares/processErrors');
-const { validateForSignIn, validateForSignUp } = require('./middlewares/celebrateValidation');
+const {
+  signInSchema,
+  signUpSchema,
+} = require('./middlewares/validationSchema');
 const NotFoundError = require('./components/NotFoundError');
 
 const { PORT = 3000 } = process.env;
@@ -42,9 +44,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', validateForSignIn(), login);
+app.post('/signin', celebrate({ body: signInSchema }), login);
 
-app.post('/signup', validateForSignUp(), createUser);
+app.post('/signup', celebrate({ body: signUpSchema }), createUser);
 
 app.use('/', auth, require('./routes/users'));
 app.use('/', auth, require('./routes/cards'));
