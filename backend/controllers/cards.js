@@ -26,7 +26,8 @@ const deleteCard = (req, res, next) => {
         return next(new ForbiddenError());
       }
       return Card.findByIdAndRemove(req.params.cardId)
-        .then((card) => res.status(200).send({ data: card }));
+        .then((card) => res.status(200).send({ data: card }))
+        .catch(next);
     })
     .catch(next);
 };
