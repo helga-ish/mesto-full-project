@@ -1,6 +1,5 @@
 const { CONFLICT_ERROR } = require('../constants/constants');
 const ValidationError = require('../components/ValidationError');
-// const NotFoundError = require('../components/NotFoundError');
 const UnauthorizedError = require('../components/UnauthorizedError');
 const ForbiddenError = require('../components/ForbiddenError');
 
@@ -28,17 +27,15 @@ const processErrors = (err, req, res, next) => {
     res
       .status(CONFLICT_ERROR)
       .send({ message: 'Пользователь с таким email уже существует.' });
-  } else if (err.statusCode == null) {
-    const { statusCode = 500, message } = err;
-
-    res
-      .status(statusCode)
-      .send({
-        message: statusCode === 500
-          ? 'На сервере произошла ошибка.'
-          : message,
-      });
   }
+  const { statusCode = 500, message } = err;
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка.'
+        : message,
+    });
   return next;
 };
 

@@ -21,15 +21,12 @@ const deleteCard = (req, res, next) => {
   Card.findOne({ _id: req.params.cardId })
     .then((cardData) => {
       if (cardData === null) {
-        return next(new NotFoundError('Карточка не найдена.'));
+        next(new NotFoundError('Карточка не найдена.'));
+      } else if (cardData.owner.toString() !== req.user._id) {
+        return next(new ForbiddenError());
       }
       return Card.findByIdAndRemove(req.params.cardId)
-        .then((card) => {
-          if (card.owner.toString() !== req.user._id) {
-            return next(new ForbiddenError());
-          }
-          return res.status(200).send({ data: card });
-        });
+        .then((card) => res.status(200).send({ data: card }));
     })
     .catch(next);
 };
